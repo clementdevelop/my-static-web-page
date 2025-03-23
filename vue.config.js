@@ -1,6 +1,7 @@
-const path = require('path')
-
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/my-static-web-page/'  // GitHub Pages base path
+    : '/',
   devServer: {
     allowedHosts: "all",
   },
@@ -8,16 +9,15 @@ module.exports = {
     loaderOptions: {
       css: {
         url: false,
-      },
-    },
+      }
+    }
   },
   chainWebpack: config => {
     config.plugin('copy').tap(args => {
-      const UNESCAPED_GLOB_SYMBOLS_RE = /(\\?)([()*?[\]{|}]|^!|[!+@](?=\())/g;
-      const publicDir = path.resolve(process.VUE_CLI_SERVICE.context, 'public').replace(/\\/g, '/');
-      const escapePublicDir= publicDir.replace(UNESCAPED_GLOB_SYMBOLS_RE, '\\$2');
-      args[0].patterns[0].globOptions.ignore = args[0].patterns[0].globOptions.ignore.map(i => i.replace(publicDir, escapePublicDir));
+      const publicDir = require('path').resolve(process.VUE_CLI_SERVICE.context, 'public').replace(/\\/g, '/');
+      const escapedPublicDir = publicDir.replace(/\$/g, '\\$2');
+      args[0].patterns[0].globOptions.ignore = args[0].patterns[0].globOptions.ignore.map(i => i.replace(publicDir, escapedPublicDir));
       return args;
-  });
+    });
   }
 };
