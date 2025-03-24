@@ -6,7 +6,7 @@
           <slot name="heading1">
             <!--Default content for heading1-->
             <div class="hero17-fragment3">
-              <span class="hero17-text7">Welcome to Your Dream Home</span>
+              <span class="hero17-text7">So you dont beileve me  baby carol ???? </span>
             </div>
           </slot>
         </h1>
