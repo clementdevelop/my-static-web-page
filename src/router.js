@@ -8,8 +8,9 @@ import './style.css'
 
 Vue.use(Router)
 Vue.use(Meta)
+
 export default new Router({
-  mode: 'history',
+  mode: 'hash',  // ✅ Changed from 'history' to 'hash'
   routes: [
     {
       name: 'Home',
@@ -18,9 +19,8 @@ export default new Router({
     },
     {
       name: '404 - Not Found',
-      path: '**',
+      path: '*',  // ✅ Use '*' instead of '**'
       component: NotFound,
-      fallback: true,
     },
   ],
 })
