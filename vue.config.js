@@ -1,6 +1,6 @@
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/my-static-web-page/'  // GitHub Pages base path
+    ? '/'  // GitHub Pages base path
     : '/',
   devServer: {
     allowedHosts: "all",
